@@ -68,7 +68,9 @@ setInterval(function() {
   
   
   var userId;
-  var bandwith;
+  var uplink;
+  var downlink;
+  var tstamp;
   socket1.on(`message`, function (topic, data) {
       
      
@@ -78,12 +80,24 @@ setInterval(function() {
               userId = topic.readUInt32LE(counter);
           }
           else if (counter === 4){
-              bandwith = topic.readUInt32LE(counter);
+              uplink = topic.readUInt32LE(counter);
            
-              user_data[userId].push(bandwith);
+              user_data[userId].push(uplink);
               console.log(userId);
           
-          }
+          }else if (counter === 8){
+            downlink = topic.readUInt32LE(counter);
+         
+            user_data[userId].push(downlink);
+        
+        
+        }else if (counter === 12){
+            tstamp = topic.readUInt32LE(counter);
+         
+            user_data[userId].push(tstamp);
+            
+        
+        }
          // console.log("32 data : " + topic.readUInt32LE(counter));
        //   console.log(userId);
         //  console.log(user_data);
