@@ -27,7 +27,7 @@ setInterval(function() {
         
      //   console.log(data[1]);
       
-        io.sockets.emit('hello', user_data);
+        io.sockets.emit('up_down', user_data);
     
 
 
@@ -52,7 +52,7 @@ setInterval(function() {
   
   const socket1 = require(`zmq`).socket(`sub`); // SUB socket
   
-  socket1.connect(`tcp://192.168.1.83:5581`);      // Connect to port 3000  // 148 83
+  socket1.connect(`tcp://192.168.1.148:5581`);      // Connect to port 3000  // 148 83
   
    for(var user_count = 1; user_count <= user; user_count++ ){
        
@@ -73,7 +73,7 @@ setInterval(function() {
   var tstamp;
   socket1.on(`message`, function (topic, data) {
       
-     
+     console.log(topic);
   
       for (var counter = 0; counter < topic.length; counter += 4) {
           if (counter === 0){
@@ -99,7 +99,7 @@ setInterval(function() {
         
         }
          // console.log("32 data : " + topic.readUInt32LE(counter));
-       //   console.log(userId);
+          console.log(userId);
         //  console.log(user_data);
       }
   
